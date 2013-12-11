@@ -103,8 +103,10 @@ void Sound::playSound(std::string sound, int loop)
 		FMODErrorCheck(result);
 	}
 
-    result = system->playSound(FMOD_CHANNEL_FREE, soundEffect, true, &soundEffectChannel);
-	bgChannel->setLoopCount(0);
+    result = system->playSound(FMOD_CHANNEL_FREE, soundEffect, false, &soundEffectChannel);
+	soundEffectChannel->setLoopCount(0);
+	soundEffectChannel->setVolume(1.0);
+
 }
 
 void Sound::stopSound(std::string sound)

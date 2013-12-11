@@ -56,7 +56,7 @@ void Graphics::initShaders()
 	}
 }
 
-void Graphics::render(std::vector<GameObject>& objects)
+void Graphics::render(std::vector<GameObject*>& objects)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(shaderProgram);
@@ -67,10 +67,16 @@ void Graphics::render(std::vector<GameObject>& objects)
 	GLfloat* uv2;
 	GLfloat* uv3;
 	GLMmodel* mesh;
-	glBegin(GL_TRIANGLES);
-	for (std::vector<GameObject>::iterator it = objects.begin() ; it != objects.end(); ++it)
+	for (std::vector<GameObject*>::iterator it = objects.begin() ; it != objects.end(); ++it)
 	{
-		mesh = it->getMesh();
+		if((*it) == NULL)
+			continue;
+		if((*it)->getVisible() == false)
+			continue;
+		glPushMatrix();
+		glTranslatef((*it)->getX(), (*it)->getY(), (*it)->getZ());
+		glBegin(GL_TRIANGLES);
+		mesh = (*it)->getMesh();
 		group = mesh->groups;
 		while (group) 
 		{
@@ -101,8 +107,9 @@ void Graphics::render(std::vector<GameObject>& objects)
 			}
 			group = group->next;
 		}
+		glEnd();
+		glPopMatrix();
 	}
-	glEnd();
 	glutSwapBuffers();
 }
 

@@ -11,7 +11,7 @@
 */
 #pragma once
 #include <stdlib.h>
-#include <GL/glut.h>
+#include "GL/glut.h"
 #include <string>
 #include <vector>
 using namespace std;

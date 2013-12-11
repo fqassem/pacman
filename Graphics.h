@@ -9,6 +9,8 @@
 #include <vector>
 #include <iostream>
 #include "GameObject.h"
+#include <glm.hpp>
+#include <gtc/type_ptr.hpp>
 
 class Graphics
 {
@@ -17,7 +19,7 @@ public:
 	~Graphics() {}
 	bool init();
 	void initShaders();
-	void render(std::vector<GameObject>& objects);
+	void Graphics::render(std::vector<GameObject*>& objects);
 private:
 	GLuint meshVAO;
 	GLuint vertexShader, fragmentShader;

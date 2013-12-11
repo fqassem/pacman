@@ -5,7 +5,7 @@
 class Pacman : public GameObject
 {
 public:
-	Pacman() : GameObject("meshes/al.obj") {}
+	Pacman() : GameObject("meshes/pacman.obj") {}
 	~Pacman() {}
 private:
 	bool alive;
